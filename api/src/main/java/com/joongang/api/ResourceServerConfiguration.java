@@ -1,5 +1,6 @@
 package com.joongang.api;
 
+import com.joongang.api.domain.UserRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -15,8 +16,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/**")
-                .authenticated();
+                .antMatchers("/open-api/**").permitAll()
+                .antMatchers("/api-test-form/**").permitAll()
+                .antMatchers("/api/user/**").hasAnyRole(UserRole.ADMIN.name())
+                .antMatchers("/api/**").authenticated();
     }
 
     @Primary

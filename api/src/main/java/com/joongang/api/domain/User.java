@@ -1,6 +1,7 @@
 package com.joongang.api.domain;
 
 import lombok.Data;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer" , "handler", "password"})
 public class User {
 
     @Id
